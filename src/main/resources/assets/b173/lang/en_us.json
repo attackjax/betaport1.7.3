@@ -1,0 +1,17 @@
+{
+  "biome.b173.rainforest": "Rainforest",
+  "biome.b173.swampland": "Swampland",
+  "biome.b173.seasonal_forest": "Seasonal Forest",
+  "biome.b173.forest": "Forest",
+  "biome.b173.savanna": "Savanna",
+  "biome.b173.shrubland": "Shrubland",
+  "biome.b173.taiga": "Taiga",
+  "biome.b173.desert": "Desert",
+  "biome.b173.plains": "Plains",
+  "biome.b173.ice_desert": "Ice Desert",
+  "biome.b173.tundra": "Tundra",
+  "generator.minecraft.normal": "Beta 1.7.3",
+  "b173.selectWorld.resultFolder": "Will be saved in:",
+  "key.fog": "Toggle Fog",
+  "key.category.b173.beta": "Beta 1.7.3"
+}

@@ -1,0 +1,23 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "b173:overworld",
+      "generator": {
+        "type": "b173:beta",
+        "biome_source": {
+          "type": "b173:beta"
+        }
+      }
+    },
+    "minecraft:the_nether": {
+      "type": "b173:the_nether",
+      "generator": {
+        "type": "b173:beta_nether",
+        "biome_source": {
+          "type": "minecraft:fixed",
+          "biome": "b173:hell"
+        }
+      }
+    }
+  }
+}

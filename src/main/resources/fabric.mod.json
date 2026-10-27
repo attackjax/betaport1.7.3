@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "betaport",
+	"provides": [
+		"b173"
+	],
+	"version": "${version}",
+	"name": "Betaport",
+	"description": "Minecraft Beta 1.7.3 on a modern client: Beta's seed-exact terrain, Nether, mobs and rules, with its look and sound built from your own copy of Beta 1.7.3.",
+	"icon": "assets/b173/icon.png",
+	"authors": [
+		"Jackie"
+	],
+	"license": "LGPL-3.0-or-later",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.b173.Beta173Mod"
+		],
+		"client": [
+			"dev.b173.client.Beta173Client"
+		]
+	},
+	"mixins": [
+		"b173.mixins.json",
+		{
+			"config": "b173.client.mixins.json",
+			"environment": "client"
+		},
+		{
+			"config": "b173.compat.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"sodium": "*",
+		"voxy": "*"
+	}
+}

@@ -1,0 +1,134 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'core/src/main/java'
+		}
+	}
+	coreTest {
+		java {
+			srcDir 'core/src/test/java'
+		}
+		resources {
+			srcDir 'core/src/test/resources'
+		}
+		compileClasspath += sourceSets.main.output
+		runtimeClasspath += sourceSets.main.output
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"betaport" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	clientCompileOnly "maven.modrinth:sodium:${project.sodium_version}"
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = 'UTF-8'
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+def coreTest = tasks.register('coreTest', JavaExec) {
+	group = 'verification'
+	description = 'Runs the Beta 1.7.3 parity suite against the generator core.'
+	classpath = sourceSets.coreTest.runtimeClasspath
+	mainClass = 'dev.b173.core.TestRunner'
+}
+
+tasks.register('coreBenchmark', JavaExec) {
+	group = 'verification'
+	description = 'Measures base terrain and population throughput of the generator core.'
+	classpath = sourceSets.coreTest.runtimeClasspath
+	mainClass = 'dev.b173.core.Benchmark'
+	jvmArgs '-Xms1G', '-Xmx1G'
+}
+
+tasks.register('worldCheck', JavaExec) {
+	group = 'verification'
+	description = 'Compares region files written by the mod with the generator core.'
+	classpath = sourceSets.coreTest.runtimeClasspath
+	mainClass = 'dev.b173.core.WorldCheck'
+	jvmArgs '-Xmx3G'
+}
+
+tasks.register('oracleCheck', JavaExec) {
+	group = 'verification'
+	description = 'Compares the generator core with a dump made by tools/beta-oracle.'
+	classpath = sourceSets.coreTest.runtimeClasspath
+	mainClass = 'dev.b173.core.OracleCheck'
+	jvmArgs '-Xmx3G'
+}
+
+tasks.register('netherOracleCheck', JavaExec) {
+	group = 'verification'
+	description = 'Compares the core Nether with a dump made by tools/beta-oracle/NetherOracle.'
+	classpath = sourceSets.coreTest.runtimeClasspath
+	mainClass = 'dev.b173.core.NetherOracleCheck'
+	jvmArgs '-Xmx3G'
+}
+
+tasks.named('check') {
+	dependsOn coreTest
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	from("LICENSE") {
+		rename { "${it}_$projectName"}
+	}
+	from("THIRD_PARTY_NOTICES.md")
+}

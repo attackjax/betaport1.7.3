@@ -1,0 +1,13 @@
+{
+	"required": false,
+	"package": "dev.b173.client.mixin.compat",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"SodiumFlatLightMixin",
+		"SodiumSmoothLightMixin",
+		"VoxyFogMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}

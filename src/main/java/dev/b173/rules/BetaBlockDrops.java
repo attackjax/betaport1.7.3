@@ -140,6 +140,9 @@ public final class BetaBlockDrops {
         if (!PICKAXE_ONLY.contains(state.getBlock()) || !BetaRules.betaWorld(player.level())) {
             return harvests;
         }
+        if (state.is(Blocks.OAK_SLAB) && !BetaSettings.strictMining() && player.getMainHandItem().is(ItemTags.AXES)) {
+            return true;
+        }
         return player.getMainHandItem().is(ItemTags.PICKAXES);
     }
 }

@@ -49,6 +49,9 @@ public final class BetaDigging {
             Integer beta = id.getNamespace().equals("minecraft") ? ITEM_IDS.get(id.getPath()) : null;
             return beta == null ? 0 : beta;
         });
-        return BetaMining.strength(item, block);
+        if (dev.b173.rules.BetaSettings.strictMining()) {
+            return BetaMining.strength(item, block);
+        }
+        return BetaMining.friendlyStrength(item, block, BetaBlockStates.meta(BetaBlockStates.beta(state)));
     }
 }

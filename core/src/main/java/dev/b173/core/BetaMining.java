@@ -25,11 +25,32 @@ public final class BetaMining {
 
     private static final int COBWEB = 30;
 
+    private static final Set<Integer> AXE_EXTRA = Set.of(25, 53, 58, 63, 64, 65, 68, 72, 84, 85, 96);
+    private static final Set<Integer> PICKAXE_EXTRA = Set.of(23, 27, 28, 45, 49, 52, 61, 62, 66, 67, 70, 71, 73, 74,
+            77, 89);
+    private static final int WOODEN_SLAB = 2;
+
     private BetaMining() {
     }
 
     public static float hardness(int block) {
         return block > 0 && block < HARDNESS.length ? HARDNESS[block] : Float.NaN;
+    }
+
+    public static float friendlyStrength(int item, int block, int meta) {
+        float beta = strength(item, block);
+        if (beta > 1.0F) {
+            return beta;
+        }
+        boolean axe = AXE_EXTRA.contains(block) || (block == 43 || block == 44) && (meta & 7) == WOODEN_SLAB;
+        switch (item) {
+            case 258, 271, 275, 279, 286:
+                return axe ? strength(item, 5) : beta;
+            case 257, 270, 274, 278, 285:
+                return PICKAXE_EXTRA.contains(block) ? strength(item, 1) : beta;
+            default:
+                return beta;
+        }
     }
 
     public static float strength(int item, int block) {

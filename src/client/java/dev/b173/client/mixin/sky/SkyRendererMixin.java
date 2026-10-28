@@ -71,12 +71,12 @@ abstract class SkyRendererMixin {
     @ModifyArg(method = "renderSunMoonAndStars", at = @At(value = "INVOKE",
             target = "Lcom/mojang/math/Axis;rotationDegrees(F)Lorg/joml/Quaternionf;"))
     private float b173$betaSunPath(float degrees) {
-        return BetaAtmosphere.skyActive() ? 0.0F : degrees;
+        return BetaAtmosphere.skyActive() && !dev.b173.client.visual.BetaIris.shadersInUse() ? 0.0F : degrees;
     }
 
     @ModifyArg(method = "renderSunriseAndSunset", at = @At(value = "INVOKE",
             target = "Lcom/mojang/math/Axis;rotationDegrees(F)Lorg/joml/Quaternionf;", ordinal = 1))
     private float b173$betaGlow(float degrees) {
-        return BetaAtmosphere.skyActive() ? degrees - 90.0F : degrees;
+        return BetaAtmosphere.skyActive() && !dev.b173.client.visual.BetaIris.shadersInUse() ? degrees - 90.0F : degrees;
     }
 }

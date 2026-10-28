@@ -24,6 +24,7 @@
 		"gui.BetaWorldOpenMixin",
 		"gui.GenericMessageScreenMixin",
 		"gui.LevelLoadingScreenMixin",
+		"gui.NoAttackIndicatorMixin",
 		"gui.NoAutosaveIndicatorMixin",
 		"gui.NoOffhandSwapMixin",
 		"gui.SelectWorldScreenAccessor",

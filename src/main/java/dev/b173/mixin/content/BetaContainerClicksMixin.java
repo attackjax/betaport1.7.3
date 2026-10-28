@@ -14,7 +14,7 @@ abstract class BetaContainerClicksMixin {
     @Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
     private void b173$betaClicks(int slot, int button, ContainerInput input, Player player, CallbackInfo ci) {
         boolean beta = (input == ContainerInput.PICKUP || input == ContainerInput.QUICK_MOVE) && (button == 0 || button == 1);
-        if (!beta && BetaRules.betaWorld(player.level())) {
+        if (!beta && dev.b173.rules.BetaClicks.enforced() && BetaRules.betaWorld(player.level())) {
             ci.cancel();
         }
     }

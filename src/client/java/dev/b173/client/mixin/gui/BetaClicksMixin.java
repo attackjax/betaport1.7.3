@@ -48,7 +48,8 @@ abstract class BetaClicksMixin extends Screen {
 
     @Unique
     private boolean b173$beta() {
-        return BetaScreens.active() && !((Object) this instanceof CreativeModeInventoryScreen);
+        return BetaScreens.active() && dev.b173.rules.BetaClicks.enforced()
+                && !((Object) this instanceof CreativeModeInventoryScreen);
     }
 
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)

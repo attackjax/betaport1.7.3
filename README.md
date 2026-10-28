@@ -7,4 +7,4 @@ DISCLAIMER:
 This mod requires a b1.7.3 installation to have been installed and run at least once for textures and sounds.
 This mod does not ship with any Mojang AB assets. 
 
-AI was used to automate tedious jobs.
+AI was used to automate most jobs with human oversight.

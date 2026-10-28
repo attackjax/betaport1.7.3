@@ -113,6 +113,18 @@ public final class BetaVideoSettingsScreen extends Screen {
         }).bounds(x(7), y(7), 150, 20).build();
         opengl.active = false;
         addRenderableWidget(opengl);
+        boolean shaders = ModVideoSettings.hasShaders();
+        addRenderableWidget(Button.builder(Component.translatable("b173.options.more"),
+                b -> this.minecraft.setScreen(ModVideoSettings.more(this, this.minecraft, this.options)))
+                .bounds(shaders ? x(8) : this.width / 2 - 75, y(8), 150, 20).build());
+        if (shaders) {
+            addRenderableWidget(Button.builder(Component.translatable("b173.options.shaders"), b -> {
+                Screen screen = ModVideoSettings.shaders(this);
+                if (screen != null) {
+                    this.minecraft.setScreen(screen);
+                }
+            }).bounds(x(9), y(9), 150, 20).build());
+        }
         addRenderableWidget(Button.builder(Component.translatable("b173.gui.done"), b -> onClose())
                 .bounds(this.width / 2 - 100, this.height / 6 + 168, 200, 20).build());
     }

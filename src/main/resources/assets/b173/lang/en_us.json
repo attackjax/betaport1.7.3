@@ -13,5 +13,7 @@
   "generator.minecraft.normal": "Beta 1.7.3",
   "b173.selectWorld.resultFolder": "Will be saved in:",
   "key.fog": "Toggle Fog",
-  "key.category.b173.beta": "Beta 1.7.3"
+  "key.category.b173.beta": "Beta 1.7.3",
+  "b173.options.more": "More Video Settings...",
+  "b173.options.shaders": "Shader Packs..."
 }

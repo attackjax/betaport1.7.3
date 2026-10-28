@@ -32,6 +32,9 @@ abstract class GenericMessageScreenMixin extends Screen {
                 || key.equals("selectWorld.resource_load") || key.equals("createWorld.preparing"))) {
             return new String[] {BetaLoading.opening(), ""};
         }
+        if (key.equals("createWorld.preparing")) {
+            return new String[] {"", ""};
+        }
         return null;
     }
 
